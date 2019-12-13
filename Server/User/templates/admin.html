@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body {
+            margin: 0 auto;
+        }
+
+        .my_table {
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: aquamarine;
+        }
+
+        table {
+            width: 1000px;
+            margin: auto;
+            margin-top: 50px;
+            border: #ED2553 1px solid;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <a class="my_table" href="{{ url_for('admin',table='user')}}">user</a>
+    <a class="my_table" href="{{ url_for('admin',table='user_info')}}">user_info</a>
+    <a class="my_table" href="{{ url_for('admin',table='user_friends')}}">user_friends</a>
+    <a class="my_table" href="{{ url_for('admin',table='send_message')}}">send_message</a>
+</div>
+<table cellspacing="10px" cellpadding="10px">
+    <tr align="center">
+        <td>ID</td>
+        {% for key in table_info_list[0] %}
+        <td>{{ key }}</td>
+        {% endfor %}
+        <td>修改</td>
+        <td>删除</td>
+    </tr>
+    {% for table_info in table_info_list %}
+    <tr align="center">
+        <td>{{ loop.index }}</td>
+        {% for key in table_info %}
+        <td>{{ table_info[key] }}</td>
+        {% endfor %}
+        {% if table_info["NULL"] != "空" %}
+        <td><a href="#">修改</a></td>
+        <td><a href="#">删除</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
